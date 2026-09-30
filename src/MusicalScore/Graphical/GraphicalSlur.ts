@@ -816,12 +816,16 @@ export class GraphicalSlur extends GraphicalCurve {
             }
         }
 
-        // when lyrics are given place above:
-        for (let idx: number = 0, len: number = this.staffEntries.length; idx < len; ++idx) {
-            const graphicalStaffEntry: GraphicalStaffEntry = this.staffEntries[idx];
-            if (graphicalStaffEntry.LyricsEntries.length > 0) {
-                this.placement = PlacementEnum.Above;
-                return;
+        // when lyrics are given place above (optional):
+        //   Not needed to avoid the lyrics: slurs are calculated before the lyrics are positioned,
+        //   so the lyrics are placed below a slur that goes below the notes.
+        if (this.rules.SlurPlacementAboveWhenLyrics) {
+            for (let idx: number = 0, len: number = this.staffEntries.length; idx < len; ++idx) {
+                const graphicalStaffEntry: GraphicalStaffEntry = this.staffEntries[idx];
+                if (graphicalStaffEntry.LyricsEntries.length > 0) {
+                    this.placement = PlacementEnum.Above;
+                    return;
+                }
             }
         }
         const startStaffEntry: GraphicalStaffEntry = this.staffEntries[0];

@@ -319,6 +319,10 @@ export class EngravingRules {
     public SlurPlacementFromXML: boolean;
     public SlurPlacementAtStems: boolean;
     public SlurPlacementUseSkyBottomLine: boolean;
+    /** Whether a slur over notes with lyrics is always placed above, regardless of the stem directions (default false).
+     *  This used to be the default. Slurs placed below push the lyrics down, so they don't collide.
+     *  (A placement given in the XML still takes precedence, see SlurPlacementFromXML) */
+    public SlurPlacementAboveWhenLyrics: boolean;
     public BezierCurveStepSize: number;
     public TPower3: number[];
     public OneMinusTPower3: number[];
@@ -871,6 +875,7 @@ export class EngravingRules {
         this.SlurPlacementFromXML = true;
         this.SlurPlacementAtStems = false;
         this.SlurPlacementUseSkyBottomLine = false;
+        this.SlurPlacementAboveWhenLyrics = false;
         this.BezierCurveStepSize = 1000;
         this.calculateCurveParametersArrays();
         this.TieGhostObjectWidth = 0.75;
